@@ -10,7 +10,7 @@ const productss = [
   { id: 2, name: "b", price: "199", description: "Good" },
 ];
 
-const Products = () => {
+const Products = ({ onHandleCart }) => {
   const classes = useStyles();
   const [products, setProducts] = useState(null);
   useEffect(() => {
@@ -29,11 +29,12 @@ const Products = () => {
     <main className={classes.content}>
       <div className={classes.toolbar} />
       <Grid container justify="center" spacing={4}>
-        {productss.map((product) => (
-          <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
-            <Product product={product} />
-          </Grid>
-        ))}
+        {products &&
+          products.map((product) => (
+            <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
+              <Product product={product} onHandleCart={onHandleCart} />
+            </Grid>
+          ))}
       </Grid>
     </main>
   );
