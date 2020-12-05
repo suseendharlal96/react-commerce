@@ -9,15 +9,17 @@ import {
   Divider,
   Button,
 } from "@material-ui/core";
+import { connect } from "react-redux";
 
 import useStyles from "./checkoutformstyles";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import ConfirmationForm from "./ConfirmationForm";
 import { commerce } from "../../lib/commerce";
+import * as actions from "../../store/actions";
 
-const CheckoutForm = ({ cart }) => {
-  console.log(cart);
+const CheckoutForm = (props) => {
+  console.log(props.cart);
   const classes = useStyles();
   const options = ["Shipping address", "Payment Details"];
   const [activeStep, setActiveStep] = useState(0);
@@ -26,7 +28,7 @@ const CheckoutForm = ({ cart }) => {
   useEffect(() => {
     const generateToken = async () => {
       try {
-        const token = await commerce.checkout.generateToken(cart, {
+        const token = await commerce.checkout.generateToken(props.cart.id, {
           type: "cart",
         });
         console.log("token", token);
@@ -45,12 +47,22 @@ const CheckoutForm = ({ cart }) => {
   const Form = () =>
     activeStep === 0 ? (
       checkoutToken ? (
-        <AddressForm checkoutToken={checkoutToken} nextStep={nextStep} />
+        <AddressForm
+          checkoutToken={checkoutToken}
+          shippingDetails={shippingDetails}
+          nextStep={nextStep}
+        />
       ) : (
-        <Typography>Loading..</Typography>
+        <CircularProgress />
       )
     ) : (
-      shippingDetails && <PaymentForm shippingDetails={shippingDetails} />
+      shippingDetails && (
+        <PaymentForm
+          checkoutToken={checkoutToken}
+          shippingDetails={shippingDetails}
+          backStep={() => setActiveStep((prevState) => prevState - 1)}
+        />
+      )
     );
   return (
     <>
@@ -73,4 +85,12 @@ const CheckoutForm = ({ cart }) => {
   );
 };
 
-export default CheckoutForm;
+const mapStateToProps = (state) => ({
+  cart: state.cartReducer.cart,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getCart: () => dispatch(actions.getCart()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutForm);

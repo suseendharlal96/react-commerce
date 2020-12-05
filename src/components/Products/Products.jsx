@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Grid } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { Grid, CircularProgress } from "@material-ui/core";
 import { connect } from "react-redux";
 
 import Product from "./Product/Product";
@@ -8,25 +8,16 @@ import * as actions from "../../store/actions";
 
 const Products = ({ onHandleCart, ...props }) => {
   const classes = useStyles();
-  // const [products, setProducts] = useState(null);
   useEffect(() => {
     props.getProducts();
   }, []);
-  // const getProducts = async () => {
-  //   try {
-  //     const { data } = await commerce.products.list();
-  //     console.log(data);
-  //     setProducts(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
+
       <Grid container justify="center" spacing={4}>
         {props.loading ? (
-          <p>Loading...</p>
+          <CircularProgress color="primary" />
         ) : (
           props.products &&
           props.products.map((product) => (
