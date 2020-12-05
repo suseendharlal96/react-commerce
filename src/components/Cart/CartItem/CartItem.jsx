@@ -7,10 +7,12 @@ import {
   CardContent,
   CardMedia,
 } from "@material-ui/core";
+import { connect } from "react-redux";
 
 import useStyles from "./style";
+import * as actions from "../../../store/actions";
 
-const CartItem = ({ item, updateCart, removeItemFromCart }) => {
+const CartItem = ({ item, ...props }) => {
   const classes = useStyles();
 
   //   const handleUpdateCartQty = (lineItemId, newQuantity) =>
@@ -36,7 +38,7 @@ const CartItem = ({ item, updateCart, removeItemFromCart }) => {
           <Button
             type="button"
             size="small"
-            onClick={() => updateCart(item.id, item.quantity - 1)}
+            onClick={() => props.updateCart(item.id, item.quantity - 1)}
           >
             -
           </Button>
@@ -44,7 +46,7 @@ const CartItem = ({ item, updateCart, removeItemFromCart }) => {
           <Button
             type="button"
             size="small"
-            onClick={() => updateCart(item.id, item.quantity + 1)}
+            onClick={() => props.updateCart(item.id, item.quantity + 1)}
           >
             +
           </Button>
@@ -53,7 +55,7 @@ const CartItem = ({ item, updateCart, removeItemFromCart }) => {
           variant="contained"
           type="button"
           color="secondary"
-          onClick={() => removeItemFromCart(item.id)}
+          onClick={() => props.removeItemFromCart(item.id)}
         >
           Remove
         </Button>
@@ -62,4 +64,9 @@ const CartItem = ({ item, updateCart, removeItemFromCart }) => {
   );
 };
 
-export default CartItem;
+const mapDispatchToProps = (dispatch) => ({
+  updateCart: (id, quantity) => dispatch(actions.updateCart(id, quantity)),
+  removeItemFromCart: (id) => dispatch(actions.removeItemFromCart(id)),
+});
+
+export default connect(null, mapDispatchToProps)(CartItem);

@@ -91,12 +91,12 @@ const AddressForm = ({ checkoutToken, nextStep }) => {
           )}
         >
           <Grid container spacing={3}>
-            <CustomInput required name="firstName" label="First Name" />
-            <CustomInput required name="lastName" label="Last name" />
-            <CustomInput required name="address1" label="Address line 1" />
-            <CustomInput required name="email" label="Email" />
-            <CustomInput required name="city" label="City" />
-            <CustomInput required name="zip" label="Zip / Postal code" />
+            <CustomInput name="firstName" label="First Name" />
+            <CustomInput name="lastName" label="Last name" />
+            <CustomInput name="address1" label="Address line 1" />
+            <CustomInput name="email" label="Email" />
+            <CustomInput name="city" label="City" />
+            <CustomInput name="zip" label="Zip / Postal code" />
             <Grid item xs={12} sm={6}>
               <InputLabel>Shipping Country</InputLabel>
               <Select

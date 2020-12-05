@@ -8,9 +8,12 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { AddShoppingCart } from "@material-ui/icons";
+import { connect } from "react-redux";
+
+import * as actions from "../../../store/actions";
 import useStyles from "./product-styles";
 
-const Product = ({ product, onHandleCart }) => {
+const Product = ({ product, ...props }) => {
   const classes = useStyles();
 
   return (
@@ -37,7 +40,7 @@ const Product = ({ product, onHandleCart }) => {
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
         <IconButton
-          onClick={() => onHandleCart(product.id, 1)}
+          onClick={() => props.addToCart(product.id, 1)}
           aria-label="add to cart"
         >
           <AddShoppingCart />
@@ -47,4 +50,8 @@ const Product = ({ product, onHandleCart }) => {
   );
 };
 
-export default Product;
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: (id) => dispatch(actions.addToCart(id, 1)),
+});
+
+export default connect(null, mapDispatchToProps)(Product);

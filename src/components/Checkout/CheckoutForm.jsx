@@ -38,15 +38,20 @@ const CheckoutForm = ({ cart }) => {
     generateToken();
   }, []);
   const nextStep = (shippingData) => {
+    console.log(shippingData);
     setShippingDetails(shippingData);
     setActiveStep((prevState) => prevState + 1);
   };
   const Form = () =>
-    activeStep === 0
-      ? checkoutToken && (
-          <AddressForm checkoutToken={checkoutToken} nextStep={nextStep} />
-        )
-      : shippingDetails && <PaymentForm shippingDetails={shippingDetails} />;
+    activeStep === 0 ? (
+      checkoutToken ? (
+        <AddressForm checkoutToken={checkoutToken} nextStep={nextStep} />
+      ) : (
+        <Typography>Loading..</Typography>
+      )
+    ) : (
+      shippingDetails && <PaymentForm shippingDetails={shippingDetails} />
+    );
   return (
     <>
       <div className={classes.toolbar}>

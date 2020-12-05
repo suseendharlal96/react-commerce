@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Typography, Button, Grid } from "@material-ui/core";
+import { connect } from "react-redux";
 
 import CartItem from "./CartItem/CartItem";
 import useStyles from "./cartstyles";
+import * as actions from "../../store/actions";
 
-const Cart = ({ cartItems, updateCart, removeItemFromCart, emptyCart }) => {
+const Cart = ({ cartItems, ...props }) => {
   console.log("cart");
   const classes = useStyles();
 
@@ -25,11 +27,7 @@ const Cart = ({ cartItems, updateCart, removeItemFromCart, emptyCart }) => {
       <Grid container spacing={3}>
         {cartItems.line_items.map((lineItem) => (
           <Grid item xs={12} sm={4} key={lineItem.id}>
-            <CartItem
-              updateCart={updateCart}
-              removeItemFromCart={removeItemFromCart}
-              item={lineItem}
-            />
+            <CartItem item={lineItem} />
           </Grid>
         ))}
       </Grid>
@@ -44,7 +42,7 @@ const Cart = ({ cartItems, updateCart, removeItemFromCart, emptyCart }) => {
             type="button"
             variant="contained"
             color="secondary"
-            onClick={emptyCart}
+            onClick={props.emptyCart}
           >
             Empty cart
           </Button>
@@ -73,4 +71,9 @@ const Cart = ({ cartItems, updateCart, removeItemFromCart, emptyCart }) => {
     </Container>
   );
 };
-export default Cart;
+
+const mapDispatchToProps = (dispatch) => ({
+  emptyCart: () => dispatch(actions.emptyCart()),
+});
+
+export default connect(null, mapDispatchToProps)(Cart);
