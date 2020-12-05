@@ -6,3 +6,4 @@ export {
   updateCart,
   removeItemFromCart,
 } from "./cart";
+export { handleCaptureCheckout } from "./order";

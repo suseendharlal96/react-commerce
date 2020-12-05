@@ -61,6 +61,7 @@ const CheckoutForm = (props) => {
           checkoutToken={checkoutToken}
           shippingDetails={shippingDetails}
           backStep={() => setActiveStep((prevState) => prevState - 1)}
+          nextStep={() => setActiveStep((prevState) => prevState + 1)}
         />
       )
     );

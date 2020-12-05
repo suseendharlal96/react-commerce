@@ -7,3 +7,7 @@ export const cart = {
   GET_CART: "GET_CART",
   CART_SUCCESS: "CART_SUCCESS",
 };
+
+export const order = {
+  ORDER_SUCCESS: "ORDER_SUCCESS",
+};

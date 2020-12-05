@@ -7,10 +7,12 @@ import thunk from "redux-thunk";
 import App from "./App.jsx";
 import productReducer from "./store/reducers/productReducer";
 import cartReducer from "./store/reducers/cartReducer";
+import orderReducer from "./store/reducers/orderReducer";
 
 const rootReducer = combineReducers({
   productReducer,
   cartReducer,
+  orderReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
