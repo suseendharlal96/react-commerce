@@ -21,12 +21,9 @@ export default makeStyles((theme) => ({
     textDecoration: "none",
   },
   cardDetails: {
-    position: "fixed",
     backgroundColor:'rgba(0,0,0,0.55)',
     color:'#fff',
     padding:'10px',
-    bottom:'0',
-    left:'0px',
     display: "flex",
     marginTop: "10%",
     width: "100%",
