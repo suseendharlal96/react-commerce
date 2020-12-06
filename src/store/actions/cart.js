@@ -8,7 +8,6 @@ export const getCart = () => async (dispatch) => {
   });
   try {
     const res = await commerce.cart.retrieve();
-    console.log(res);
     dispatch({
       type: actionType.cart.CART_SUCCESS,
       payload: res,

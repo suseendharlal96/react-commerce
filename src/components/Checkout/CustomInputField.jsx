@@ -10,7 +10,8 @@ const CustomInputField = ({ name, label, value }) => {
         control={control}
         as={TextField}
         fullWidth
-        defaultValue={value}
+        value={value}
+        defaultValue={value ? value : ""}
         name={name}
         label={label}
         required

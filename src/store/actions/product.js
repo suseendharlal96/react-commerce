@@ -8,7 +8,6 @@ export const getProducts = () => async (dispatch) => {
   });
   try {
     const { data } = await commerce.products.list();
-    console.log(data);
     dispatch({
       type: actionType.products.PRODUCTS_SUCCESS,
       payload: data,

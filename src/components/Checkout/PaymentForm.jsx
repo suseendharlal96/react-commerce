@@ -18,6 +18,7 @@ const PaymentForm = ({
   backStep,
   shippingDetails,
   nextStep,
+  purchase,
   handleCaptureCheckout,
 }) => {
   const handleSubmit = async (e, elements, stripe) => {
@@ -54,7 +55,8 @@ const PaymentForm = ({
           },
         },
       };
-      handleCaptureCheckout(checkoutToken.id, orderData);
+      purchase();
+      handleCaptureCheckout(orderData);
       nextStep();
     }
   };
@@ -92,8 +94,8 @@ const PaymentForm = ({
 };
 
 const mapStateToDispatch = (dispatch) => ({
-  handleCaptureCheckout: (id, data) =>
-    dispatch(actions.handleCaptureCheckout(id, data)),
+  handleCaptureCheckout: (data) =>
+    dispatch(actions.handleCaptureCheckout(data)),
 });
 
 export default connect(null, mapStateToDispatch)(PaymentForm);

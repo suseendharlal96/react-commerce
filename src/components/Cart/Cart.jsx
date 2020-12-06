@@ -8,7 +8,6 @@ import useStyles from "./cartstyles";
 import * as actions from "../../store/actions";
 
 const Cart = ({ cartItems, ...props }) => {
-  console.log("cart");
   const classes = useStyles();
 
   const renderEmptyCart = () => (

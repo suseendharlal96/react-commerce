@@ -8,6 +8,7 @@ import {
   Grid,
   Typography,
   Input,
+  CssBaseline,
 } from "@material-ui/core";
 import { useForm, FormProvider } from "react-hook-form";
 
@@ -15,7 +16,6 @@ import CustomInput from "./CustomInputField";
 import { commerce } from "../../lib/commerce";
 
 const AddressForm = ({ checkoutToken, nextStep, shippingDetails }) => {
-  console.log(shippingDetails);
   const methods = useForm();
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
@@ -45,9 +45,7 @@ const AddressForm = ({ checkoutToken, nextStep, shippingDetails }) => {
     const { countries } = await commerce.services.localeListShippingCountries(
       checkoutTokenId
     );
-    console.log("countries", countries);
     setShippingCountries(countries);
-    console.log(Object.keys(countries)[0]);
     if (shippingDetails && shippingDetails.shippingCountry) {
       setShippingCountry(shippingDetails.shippingCountry);
     } else {
@@ -59,7 +57,6 @@ const AddressForm = ({ checkoutToken, nextStep, shippingDetails }) => {
     const { subdivisions } = await commerce.services.localeListSubdivisions(
       countryCode
     );
-    console.log(subdivisions);
     setShippingSubdivisions(subdivisions);
     if (shippingDetails && shippingDetails.shippingSubdivision) {
       setShippingSubdivision(shippingDetails.shippingSubdivision);
@@ -87,6 +84,7 @@ const AddressForm = ({ checkoutToken, nextStep, shippingDetails }) => {
 
   return (
     <>
+      <CssBaseline />
       <Typography variant="h6" gutterBottom>
         Shipping Address
       </Typography>
@@ -194,7 +192,7 @@ const AddressForm = ({ checkoutToken, nextStep, shippingDetails }) => {
               Back to Cart
             </Button>
             <Button type="submit" variant="contained" color="primary">
-              Proceed to payment
+              Confirm
             </Button>
           </div>
         </form>

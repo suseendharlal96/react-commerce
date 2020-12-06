@@ -10,4 +10,5 @@ export const cart = {
 
 export const order = {
   ORDER_SUCCESS: "ORDER_SUCCESS",
+  CLEAR_ORDERS: "CLEAR_ORDERS",
 };

@@ -1,7 +1,7 @@
 import * as actionType from "../actions/actionTypes";
 
 const initState = {
-  order: null,
+  order: {},
 };
 
 const orderReducer = (state = initState, action) => {
@@ -10,6 +10,12 @@ const orderReducer = (state = initState, action) => {
       return {
         ...state,
         order: action.payload,
+      };
+
+    case actionType.order.CLEAR_ORDERS:
+      return {
+        ...state,
+        order: null,
       };
 
     default:

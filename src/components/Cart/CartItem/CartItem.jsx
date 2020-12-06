@@ -15,11 +15,6 @@ import * as actions from "../../../store/actions";
 const CartItem = ({ item, ...props }) => {
   const classes = useStyles();
 
-  //   const handleUpdateCartQty = (lineItemId, newQuantity) =>
-  //     onUpdateCartQty(lineItemId, newQuantity);
-
-  //   const handleRemoveFromCart = (lineItemId) => onRemoveFromCart(lineItemId);
-
   return (
     <Card className="cart-item">
       <CardMedia

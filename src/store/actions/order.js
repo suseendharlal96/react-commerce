@@ -1,24 +1,24 @@
 import * as actionType from "./actionTypes";
 import { commerce } from "../../lib/commerce";
 
-export const handleCaptureCheckout = (checkoutTokenId, newOrder) => async (
-  dispatch
-) => {
+export const handleCaptureCheckout = (newOrder) => async (dispatch) => {
   try {
-    const incomingOrder = await commerce.checkout.capture(
-      checkoutTokenId,
-      newOrder
-    );
     dispatch({
       type: actionType.order.ORDER_SUCCESS,
-      payload: incomingOrder,
+      payload: newOrder,
     });
-    const newCart = await commerce.cart.refresh();
+    const { cart } = await commerce.cart.empty();
     dispatch({
       type: actionType.cart.CART_SUCCESS,
-      payload: newCart,
+      payload: cart,
     });
   } catch (error) {
     console.log(error.data.error.message);
   }
+};
+
+export const clearOrders = () => (dispatch) => {
+  dispatch({
+    type: actionType.order.CLEAR_ORDERS,
+  });
 };
